@@ -19,7 +19,11 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--color-fondo);
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm66-3c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-40-39c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm30 14c0 1.105.895 2 2 2s2-.895 2-2-.895-2-2-2-2 .895-2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-image: 
+                url("../assets/texturas/papel-textura.png"),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm66-3c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-40-39c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm30 14c0 1.105.895 2 2 2s2-.895 2-2-.895-2-2-2-2 .895-2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-blend-mode: multiply, normal;
+            background-size: 250px 250px, 100px 100px;
             color: #1a1a1a;
             overflow-x: hidden;
             display: flex;
@@ -35,6 +39,9 @@
 
         .sticker-card {
             background-color: var(--color-papel);
+            background-image: url("../assets/texturas/papel-textura.png");
+            background-blend-mode: multiply;
+            background-size: 400px 400px;
             border: 4px solid white;
             border-radius: 20px;
             box-shadow: 
@@ -71,9 +78,10 @@
             right: 0;
             bottom: -28px;
             height: 56px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='56' viewBox='0 0 240 56'%3E%3Cpath fill='%23f9f7f2' d='M0 14l20 8 22-14 28 20 30-16 26 18 32-18 28 16 22-14 20 8 22-10 20 12v32H0z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='56' viewBox='0 0 1200 56' preserveAspectRatio='none'%3E%3Cpath fill='%23f9f7f2' d='M0,20 Q15,8 25,18 T45,12 Q60,25 70,15 T95,22 Q105,10 120,19 T145,14 Q160,28 175,16 T200,24 Q215,12 230,20 T255,15 Q270,26 285,18 T310,21 Q325,9 340,17 T365,23 Q380,11 395,19 T420,16 Q435,27 450,15 T475,22 Q490,10 505,18 T530,20 Q545,8 560,16 T585,24 Q600,12 615,20 T640,15 Q655,25 670,17 T695,21 Q710,9 725,19 T750,14 Q765,26 780,18 T805,22 Q820,10 835,20 T860,16 Q875,28 890,16 T915,23 Q930,11 945,19 T970,21 Q985,9 1000,17 T1025,24 Q1040,12 1055,20 T1080,15 Q1095,25 1110,17 T1135,22 Q1150,10 1165,18 T1190,20 L1200,20 L1200,56 L0,56 Z'/%3E%3C/svg%3E");
             background-repeat: repeat-x;
-            background-size: 240px 56px;
+            background-size: 1200px 56px;
+            background-position: center;
             pointer-events: none;
         }
 

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma Cultura es Dignidad Mayor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@500;700;900&display=swap');
+        
+        :root {
+            --color-fondo: #e34a38; /* Rojo/Naranja de la infografía */
+            --color-papel: #f9f7f2;
+            --color-amarillo: #fdd835;
+            --color-verde: #4a784d;
+            --color-azul: #0097a7;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-fondo);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm66-3c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-40-39c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm30 14c0 1.105.895 2 2 2s2-.895 2-2-.895-2-2-2-2 .895-2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #1a1a1a;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .title-font {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Efecto Sticker / Recorte */
+        .sticker-card {
+            background-color: var(--color-papel);
+            border: 4px solid white;
+            border-radius: 20px;
+            box-shadow: 
+                0 4px 6px rgba(0,0,0,0.1),
+                0 0 0 4px rgba(255,255,255,0.2);
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+            height: 100%; /* Para igualar alturas en grid */
+        }
+
+        .sticker-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .sticker-card:hover {
+            transform: rotate(0deg) scale(1.02);
+            z-index: 10;
+        }
+
+        /* Encabezado compacto con efecto rasgado */
+        .header-torn {
+            background-color: var(--color-verde);
+            position: relative;
+            padding-bottom: 2.5rem;
+            overflow: visible;
+            filter: drop-shadow(0 10px 0 rgba(0,0,0,0.1));
+            margin-bottom: 2.5rem;
+        }
+
+        .header-torn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -28px;
+            height: 56px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='56' viewBox='0 0 240 56'%3E%3Cpath fill='%23f9f7f2' d='M0 14l20 8 22-14 28 20 30-16 26 18 32-18 28 16 22-14 20 8 22-10 20 12v32H0z'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 240px 56px;
+            pointer-events: none;
+        }
+
+        /* Footer con efecto rasgado invertido (visual) */
+        .footer-torn {
+            background-color: #262626; /* Color oscuro para contraste */
+            color: white;
+            padding: 3rem 1rem 2rem 1rem;
+            margin-top: auto; /* Empuja el footer al final */
+            position: relative;
+        }
+        
+        .footer-torn::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-color: #262626;
+            clip-path: polygon(
+                0% 100%, 100% 100%, 100% 0%,
+                98% 80%, 95% 20%, 92% 80%, 89% 20%, 85% 80%,
+                82% 20%, 78% 80%, 75% 20%, 71% 80%, 68% 20%,
+                65% 80%, 61% 20%, 58% 80%, 55% 20%, 51% 80%,
+                48% 20%, 45% 80%, 41% 20%, 38% 80%, 35% 20%,
+                31% 80%, 28% 20%, 25% 80%, 21% 20%, 18% 80%,
+                15% 20%, 11% 80%, 8% 20%, 5% 80%, 2% 20%,
+                0% 80%
+            );
+        }
+
+        .filter-btn {
+            font-family: 'Anton', sans-serif;
+            background: white;
+            border: 3px solid white;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+            color: var(--color-fondo);
+            border-radius: 12px;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            width: 100%; /* Full width on mobile within grid */
+        }
+        
+        @media (min-width: 640px) {
+            .filter-btn { width: auto; }
+        }
+
+        .filter-btn.active {
+            background: var(--color-amarillo);
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .filter-btn-felipe {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #1e40af;
+        }
+        .filter-btn-felipe.active {
+            background: #2563eb;
+            color: white;
+            border-color: white;
+        }
+
+        .logo-box {
+            background: white;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-align: center;
+            color: #333;
+            border: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .day-badge {
+            background: var(--color-verde);
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 3px solid white;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            margin-bottom: 1rem;
+        }
+
+        .press-tag {
+            background: #2563eb;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transform: rotate(1deg);
+            white-space: nowrap;
+        }
+
+        .pickup-note {
+            background: #e0f2fe;
+            border-left: 6px solid #0ea5e9;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .highlight-marker {
+            background: linear-gradient(120deg, rgba(253, 216, 53, 0.6) 0%, rgba(253, 216, 53, 0.6) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 85%;
+        }
+    </style>
+</head>
+<body class="pb-0">
+
+    <!-- Cabecera Optimizada -->
+    <header class="header-torn pt-6 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Branding Principal Izquierda -->
+                <div class="flex items-center gap-4">
+                    <div class="p-2 transform -rotate-1">
+                        <img src="assets/CUDIMALOGO.png" alt="Cultura es Dignidad Mayor" class="h-40 md:h-48 w-auto block">
+                    </div>
+                    <div class="hidden md:block h-16 w-0.5 bg-white/70"></div>
+                    <div class="p-2 transform rotate-1">
+                        <img src="assets/BLANCOCULTURAS@6x.png" alt="Ministerio de las Culturas, las Artes y los Saberes" class="h-28 md:h-32 w-auto block drop-shadow">
+                    </div>
+                </div>
+
+                <!-- Título Derecha/Centro -->
+                <div class="text-center md:text-right">
+                    <h1 class="text-4xl md:text-6xl text-[#e34a38] mb-1 drop-shadow-sm leading-none">CRONOGRAMA<br>TERRITORIAL</h1>
+                    <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">
+                        <span class="text-[var(--color-amarillo)]">Semana</span> <span class="highlight-marker px-1 text-slate-800">2 al 9 de Febrero</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtros -->
+    <section class="max-w-7xl mx-auto px-4 mb-8 relative z-10 w-full">
+        <div class="bg-white/95 backdrop-blur rounded-xl p-4 md:p-6 border-4 border-white shadow-lg mx-auto w-full md:max-w-5xl transform -rotate-1 transition-transform hover:rotate-0">
+            <h2 class="text-lg text-center text-slate-800 mb-4 uppercase tracking-wide">Filtrar por Encargado:</h2>
+            <div id="filter-container" class="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-2 md:gap-3">
+                <button onclick="filterEvents('Todos')" id="btn-Todos" class="filter-btn active px-4 py-2 text-xs uppercase tracking-wider col-span-2 md:col-span-1">VER TODOS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grilla de Tarjetas -->
+    <main class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 flex-grow w-full" id="calendar-body">
+        <!-- Contenido dinámico -->
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="footer-torn">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 opacity-80">
+            <div class="text-center md:text-left">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Una iniciativa de:</p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                    <div class="bg-white/10 px-3 py-2 rounded text-[0.6rem] font-bold tracking-wide border border-white/20">MINISTERIO DEL TRABAJO</div>
+                    <div class="bg-white/10 px-3 py-2 rounded text-[0.6rem] font-bold tracking-wide border border-white/20">PROSPERIDAD SOCIAL</div>
+                    <div class="bg-white/10 px-3 py-2 rounded text-[0.6rem] font-bold tracking-wide border border-white/20">GOBIERNO DE COLOMBIA</div>
+                </div>
+            </div>
+            <div class="text-[0.65rem] text-gray-500 text-center max-w-xs">
+                Cultura es Dignidad Mayor - Estrategia de Renta Básica Solidaria para Artistas Mayores.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const eventsData = [
+            {
+                day: "Lunes 2 de Febrero",
+                items: [
+                    {
+                        title: "GIRARDOT Y PROVINCIA",
+                        info: "Reúne a Ricaurte, Agua de Dios, Flandes y Guataquí.",
+                        time: "MAÑANA",
+                        encargados: ["Ana María Real"],
+                        pickups: [
+                            { n: "Ana María Real", l: "Calle 116 (Salida Bogotá)" }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "Martes 3 de Febrero",
+                items: [
+                    {
+                        title: "BOYACÁ: GUATEQUE",
+                        info: "10am Neira y Oriente | 3pm Tenza (Hotel).",
+                        time: "6:00 AM",
+                        encargados: ["Yully R. Camelo", "Emerson Fandiño", "Mónica López"],
+                        pickups: [
+                            { n: "Emerson Fandiño y Mónica López", l: "Estacionalidad Av. Chile Transmilenio (6:00 AM)" },
+                            { n: "Yully R. Camelo", l: "Autopista Chocontá (8:30 AM)" }
+                        ]
+                    },
+                    {
+                        title: "ACTIVACIÓN CIUDAD BOLÍVAR",
+                        info: "Casa de la Cultura (Arborizadora Baja).",
+                        time: "4:00 PM",
+                        encargados: ["Donatello", "Felipe Camacho"],
+                        pickups: []
+                    }
+                ]
+            },
+            {
+                day: "Miércoles 4 de Febrero",
+                items: [
+                    {
+                        title: "RUTA VILLETA - GUADUAS",
+                        info: "8am Villeta (Biblioteca) | 12pm Guaduas. Pernoctada en Pto. Salgar.",
+                        time: "4:30 AM",
+                        encargados: ["Ana María Real", "Emerson Fandiño"],
+                        pickups: [
+                            { n: "Emerson Fandiño", l: "Almacén Metro Fontibón (4:30 AM)" },
+                            { n: "Ana María Real", l: "Calle 116 (Salida Bogotá)" }
+                        ]
+                    },
+                    {
+                        title: "RUTA CHOCONTÁ - MACHETÁ",
+                        info: "9am Chocontá | 2pm Machetá (Reúne Manta, Tibiritá).",
+                        time: "6:45 AM",
+                        encargados: ["Jeimmy Ruiz", "Mónica López", "Yully R. Camelo"],
+                        pickups: [
+                            { n: "Jeimmy Ruiz y Mónica López", l: "Av. Chile NQS (6:45 AM)" },
+                            { n: "Yully R. Camelo", l: "Autopista Norte Chocontá (8:00 AM)" }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "Jueves 5 de Febrero",
+                items: [
+                    {
+                        title: "PUERTO SALGAR Y PTO. BOYACÁ",
+                        info: "8am Pto. Salgar | 1:30pm Pto. Boyacá. Regreso a Bogotá.",
+                        time: "8:00 AM",
+                        encargados: ["Ana María Real", "Emerson Fandiño"],
+                        pickups: [
+                            { n: "Equipo en campo", l: "Salida desde Puerto Salgar" }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "Viernes 6 de Febrero",
+                items: [
+                    {
+                        title: "MIRAFLORES Y RAMIRIQUÍ",
+                        info: "10am Miraflores | 3pm Ramiriquí (Bibliotecas).",
+                        time: "4:00 AM",
+                        encargados: ["Mercy Arias", "Yully R. Camelo", "Felipe Camacho"],
+                        pickups: [
+                            { n: "Mercy Arias", l: "Puente peatonal Portal Norte Éxito 170 (4:00 AM)" },
+                            { n: "Felipe Camacho", l: "Clínica de la Sabana (4:20 AM)" },
+                            { n: "Yully R. Camelo", l: "Autopista Chocontá (5:00 AM)" }
+                        ]
+                    },
+                    {
+                        title: "SOACHA (COMUNAS 4, 5, 6)",
+                        info: "8am Soacha. Salida a Mesitas al terminar.",
+                        time: "5:00 AM",
+                        encargados: ["Ana María Real", "Emerson Fandiño"],
+                        pickups: [
+                            { n: "Ana María y Emerson", l: "Punto por definir" }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "Sábado 7 de Febrero",
+                items: [
+                    {
+                        title: "MESITAS DEL COLEGIO",
+                        info: "Reúne San Antonio del Tequendama, Viotá.",
+                        time: "MAÑANA",
+                        encargados: ["Ana María Real", "Emerson Fandiño"],
+                        pickups: []
+                    },
+                    {
+                        title: "SABANA CENTRO Y NORTE",
+                        info: "8am Sesquilé | 11:30am Tocancipá | 3pm Chía.",
+                        time: "6:00 AM",
+                        encargados: ["Jeimmy Ruiz", "Mercy Arias", "Felipe Camacho", "Yully R. Camelo"],
+                        pickups: [
+                            { n: "Jeimmy Ruiz y Mercy Arias", l: "Éxito Portal Norte (6:00 AM)" },
+                            { n: "Felipe Camacho", l: "Clínica de la Sabana (6:20 AM)" },
+                            { n: "Yully R. Camelo", l: "Autopista Chocontá (7:20 AM)" }
+                        ]
+                    }
+                ]
+            },
+            {
+                day: "Domingo 8 de Febrero",
+                items: [
+                    {
+                        title: "PACHO Y RIONEGRO",
+                        info: "Reúne a La Palma, Yacopí, La Peña.",
+                        time: "9:00 AM",
+                        encargados: ["Ana María Real", "Felipe Camacho"],
+                        pickups: [
+                            { n: "Felipe Camacho", l: "San Jerónimo, Cajicá (6:30 AM)" },
+                            { n: "Ana María Real", l: "Calle 116 (Bogotá)" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let activeFilter = 'Todos';
+
+        function renderCalendar() {
+            const container = document.getElementById('calendar-body');
+            container.innerHTML = '';
+
+            eventsData.forEach(dayData => {
+                const filteredItems = dayData.items.filter(item => 
+                    activeFilter === 'Todos' || item.encargados.includes(activeFilter)
+                );
+
+                if (filteredItems.length === 0) return;
+
+                const dayCard = document.createElement('div');
+                dayCard.className = `sticker-card flex flex-col p-6`;
+                
+                let itemsHtml = filteredItems.map(item => {
+                    const hasFelipe = item.encargados.includes("Felipe Camacho");
+                    return `
+                    <div class="mb-8 last:mb-0 relative border-b-2 border-dashed border-gray-200 pb-6 last:border-0 last:pb-0">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-bold bg-slate-800 text-white px-3 py-1 rounded-full uppercase tracking-wide">${item.time}</span>
+                            ${hasFelipe ? '<span class="press-tag">📸 PRENSA MINCULTURA</span>' : ''}
+                        </div>
+                        
+                        <h3 class="text-2xl text-[#e34a38] leading-none mb-2 drop-shadow-sm">${item.title}</h3>
+                        <p class="text-sm text-slate-700 font-bold leading-tight">${item.info}</p>
+                        
+                        ${item.pickups.length > 0 ? `
+                            <div class="pickup-note">
+                                <p class="text-[10px] font-black text-blue-600 uppercase mb-2 tracking-widest">PUNTOS DE RECOGIDA:</p>
+                                ${item.pickups.map(p => `
+                                    <div class="mb-2 last:mb-0">
+                                        <p class="font-bold text-slate-800 text-xs">${p.n}</p>
+                                        <p class="text-[11px] text-slate-500 italic">${p.l}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            ${item.encargados.map(e => `
+                                <span class="text-[10px] px-3 py-1 bg-[#fff8e1] border border-[#ffecb3] text-orange-800 font-bold rounded-full uppercase">${e}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `}).join('');
+
+                dayCard.innerHTML = `
+                    <div class="text-center relative -top-10">
+                        <div class="day-badge">${dayData.day}</div>
+                    </div>
+                    <div class="-mt-6">
+                        ${itemsHtml}
+                    </div>
+                `;
+                container.appendChild(dayCard);
+            });
+        }
+
+        function setupFilters() {
+            const encargadosSet = new Set();
+            eventsData.forEach(d => d.items.forEach(i => i.encargados.forEach(e => encargadosSet.add(e))));
+            
+            const filterContainer = document.getElementById('filter-container');
+            const sortedEncargados = Array.from(encargadosSet).sort();
+
+            sortedEncargados.forEach(encargado => {
+                const btn = document.createElement('button');
+                btn.id = `btn-${encargado.replace(/\s+/g, '-')}`;
+                
+                if (encargado.includes("Felipe Camacho")) {
+                    btn.className = "filter-btn filter-btn-felipe px-4 py-2 text-xs uppercase tracking-wider h-auto min-h-[50px]";
+                    btn.innerHTML = `
+                        <div class="font-bold leading-tight">${encargado}</div>
+                        <div class="text-[9px] mt-1 bg-white/30 px-2 py-0.5 rounded-full font-black">
+                            ENLACE COMUNICACIONES
+                        </div>
+                    `;
+                } else {
+                    btn.className = "filter-btn px-4 py-2 text-xs uppercase tracking-wider h-auto min-h-[50px]";
+                    btn.textContent = encargado;
+                }
+
+                btn.onclick = () => filterEvents(encargado);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function filterEvents(name) {
+            if (activeFilter === name) {
+                activeFilter = 'Todos';
+            } else {
+                activeFilter = name;
+            }
+            
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            
+            const btnId = activeFilter === 'Todos' ? 'btn-Todos' : `btn-${activeFilter.replace(/\s+/g, '-')}`;
+            const targetBtn = document.getElementById(btnId);
+            if (targetBtn) targetBtn.classList.add('active');
+
+            renderCalendar();
+        }
+
+        setupFilters();
+        renderCalendar();
+    </script>
+</body>
+</html>

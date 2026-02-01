@@ -351,6 +351,9 @@
                 dayCard.className = `sticker-card flex flex-col`;
                 const accordionId = `accordion-${index}`;
                 
+                // Extraer municipios principales de cada evento del día
+                const municipios = dayData.items.map(item => item.title).join(' • ');
+                
                 let itemsHtml = dayData.items.map(item => {
                     return `
                     <div class="mb-8 last:mb-0 relative border-b-2 border-dashed border-gray-200 pb-6 last:border-0 last:pb-0">
@@ -370,10 +373,15 @@
 
                 dayCard.innerHTML = `
                     <div class="accordion-header p-6 flex items-center justify-between" onclick="toggleAccordion('${accordionId}')">
-                        <div class="text-center flex-1 relative">
-                            <div class="day-badge inline-block">${dayData.day}</div>
+                        <div class="flex-1">
+                            <div class="text-center mb-2">
+                                <div class="day-badge inline-block">${dayData.day}</div>
+                            </div>
+                            <div class="text-center text-sm text-slate-700 font-bold px-4">
+                                📍 ${municipios}
+                            </div>
                         </div>
-                        <div class="toggle-icon" id="icon-${accordionId}">+</div>
+                        <div class="toggle-icon ml-4 flex-shrink-0" id="icon-${accordionId}">+</div>
                     </div>
                     <div class="accordion-content" id="${accordionId}">
                         ${itemsHtml}

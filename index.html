@@ -178,9 +178,9 @@
         .press-tag {
             background: #2563eb;
             color: white;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -188,7 +188,16 @@
             align-items: center;
             gap: 4px;
             transform: rotate(1deg);
-            white-space: nowrap;
+            max-width: 200px;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        @media (min-width: 640px) {
+            .press-tag {
+                max-width: none;
+                white-space: nowrap;
+            }
         }
 
         .pickup-note {
@@ -281,9 +290,9 @@
                         title: "GIRARDOT Y PROVINCIA",
                         info: "Reúne a Ricaurte, Agua de Dios, Flandes y Guataquí.",
                         time: "MAÑANA",
-                        encargados: ["Anamaría Murcia"],
+                        encargados: ["Ana María Murcia"],
                         pickups: [
-                            { n: "Anamaría Murcia", l: "Calle 116 (Salida Bogotá)" }
+                            { n: "Ana María Murcia", l: "Calle 116 (Salida Bogotá)" }
                         ]
                     }
                 ]
@@ -317,10 +326,10 @@
                         title: "RUTA VILLETA - GUADUAS",
                         info: "8am Villeta (Biblioteca) | 12pm Guaduas. Pernoctada en Pto. Salgar.",
                         time: "4:30 AM",
-                        encargados: ["Anamaría Murcia", "Emerson Fandiño"],
+                        encargados: ["Ana María Murcia", "Emerson Fandiño"],
                         pickups: [
                             { n: "Emerson Fandiño", l: "Almacén Metro Fontibón (4:30 AM)" },
-                            { n: "Anamaría Murcia", l: "Calle 116 (Salida Bogotá)" }
+                            { n: "Ana María Murcia", l: "Calle 116 (Salida Bogotá)" }
                         ]
                     },
                     {
@@ -342,7 +351,7 @@
                         title: "PUERTO SALGAR Y PTO. BOYACÁ",
                         info: "8am Pto. Salgar | 1:30pm Pto. Boyacá. Regreso a Bogotá.",
                         time: "8:00 AM",
-                        encargados: ["Anamaría Murcia", "Emerson Fandiño"],
+                        encargados: ["Ana María Murcia", "Emerson Fandiño"],
                         pickups: [
                             { n: "Equipo en campo", l: "Salida desde Puerto Salgar" }
                         ]
@@ -367,9 +376,9 @@
                         title: "SOACHA (COMUNAS 4, 5, 6)",
                         info: "8am Soacha. Salida a Mesitas al terminar.",
                         time: "5:00 AM",
-                        encargados: ["Anamaría Murcia", "Emerson Fandiño"],
+                        encargados: ["Ana María Murcia", "Emerson Fandiño"],
                         pickups: [
-                            { n: "Anamaría y Emerson", l: "Punto por definir" }
+                            { n: "Ana María y Emerson", l: "Punto por definir" }
                         ]
                     }
                 ]
@@ -381,7 +390,7 @@
                         title: "MESITAS DEL COLEGIO",
                         info: "Reúne San Antonio del Tequendama, Viotá.",
                         time: "MAÑANA",
-                        encargados: ["Anamaría Murcia", "Emerson Fandiño"],
+                        encargados: ["Ana María Murcia", "Emerson Fandiño"],
                         pickups: []
                     },
                     {
@@ -404,10 +413,10 @@
                         title: "PACHO Y RIONEGRO",
                         info: "Reúne a La Palma, Yacopí, La Peña.",
                         time: "9:00 AM",
-                        encargados: ["Anamaría Murcia", "Felipe Camacho"],
+                        encargados: ["Ana María Murcia", "Felipe Camacho"],
                         pickups: [
                             { n: "Felipe Camacho", l: "San Jerónimo, Cajicá (6:30 AM)" },
-                            { n: "Anamaría Murcia", l: "Calle 116 (Bogotá)" }
+                            { n: "Ana María Murcia", l: "Calle 116 (Bogotá)" }
                         ]
                     }
                 ]
@@ -436,7 +445,7 @@
                     <div class="mb-8 last:mb-0 relative border-b-2 border-dashed border-gray-200 pb-6 last:border-0 last:pb-0">
                         <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                             <span class="text-xs font-bold bg-slate-800 text-white px-3 py-1 rounded-full uppercase tracking-wide">${item.time}</span>
-                            ${hasFelipe ? '<span class="press-tag">📸 Cubrimiento Resuelto Enlace de Comunicaciones FCO</span>' : ''}
+                            ${hasFelipe ? '<span class="press-tag">📸 Cubrimiento Resuelto<br>Enlace de Comunicaciones FCO</span>' : ''}
                         </div>
                         
                         <h3 class="text-2xl text-[#e34a38] leading-none mb-2 drop-shadow-sm">${item.title}</h3>

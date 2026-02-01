@@ -143,6 +143,40 @@
             margin-bottom: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            transform: scale(1.02);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-content.active {
+            max-height: 3000px;
+            transition: max-height 0.5s ease-in;
+            padding: 1rem 1.5rem 1.5rem;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-verde);
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(45deg);
+        }
     </style>
 </head>
 <body class="pb-0">
@@ -245,7 +279,7 @@
                         encargados: ["Ana María Murcia", "Emerson Fandiño"]
                     },
                     {
-                        title: "SABANA CENTRO: SESQUILÉ",
+                        title: "SABANA NORTE: SESQUILÉ",
                         info: "<strong>Sesquilé.</strong> Lugar: Biblioteca Pública Municipal de Sesquilé - Leyenda del Dorado - Carrera 7 No. 15 - 51.<br>Horario: 8am a 12pm<br><em>Suesca y Guatavita</em>",
                         encargados: ["Jeimmy Ruiz", "Mercy Arias", "Felipe Camacho", "Yully R. Camelo"]
                     },
@@ -290,7 +324,7 @@
                         encargados: ["Ana María Murcia", "Emerson Fandiño"]
                     },
                     {
-                        title: "SABANA NORTE: CHOCONTÁ - TOCANCIPÁ - CHÍA",
+                        title: "SABANA CENTRO: CHOCONTÁ - TOCANCIPÁ - CHÍA",
                         info: "<strong>Chocontá.</strong> Lugar: Almeydanza/Casa de la cultura/Teatro Municipal.<br>Horario: 8am a 10:30am<br><em>Lenguazaque, Villa Pinzón</em><br><strong>Tocancipá.</strong> Lugar: Casa futchativa.<br>Horario: 11:30am a 1pm<br><em>Sopó, Gachancipá, Zipaquirá</em><br><strong>Chía.</strong> Lugar: Biblioteca Municipal.<br>Horario: 3pm a 5:30pm<br><em>Cajicá, Cota, Tabio, Tenjo.</em>",
                         encargados: ["Jeimmy Ruiz", "Mercy Arias", "Felipe Camacho", "Yully R. Camelo"]
                     }
@@ -312,9 +346,10 @@
             const container = document.getElementById('calendar-body');
             container.innerHTML = '';
 
-            eventsData.forEach(dayData => {
+            eventsData.forEach((dayData, index) => {
                 const dayCard = document.createElement('div');
-                dayCard.className = `sticker-card flex flex-col p-6`;
+                dayCard.className = `sticker-card flex flex-col`;
+                const accordionId = `accordion-${index}`;
                 
                 let itemsHtml = dayData.items.map(item => {
                     return `
@@ -334,15 +369,32 @@
                 `}).join('');
 
                 dayCard.innerHTML = `
-                    <div class="text-center relative -top-10">
-                        <div class="day-badge">${dayData.day}</div>
+                    <div class="accordion-header p-6 flex items-center justify-between" onclick="toggleAccordion('${accordionId}')">
+                        <div class="text-center flex-1 relative">
+                            <div class="day-badge inline-block">${dayData.day}</div>
+                        </div>
+                        <div class="toggle-icon" id="icon-${accordionId}">+</div>
                     </div>
-                    <div class="-mt-6">
+                    <div class="accordion-content" id="${accordionId}">
                         ${itemsHtml}
                     </div>
                 `;
                 container.appendChild(dayCard);
             });
+        }
+
+        function toggleAccordion(accordionId) {
+            const content = document.getElementById(accordionId);
+            const icon = document.getElementById('icon-' + accordionId);
+            
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
+            
+            if (icon.classList.contains('rotated')) {
+                icon.textContent = '−';
+            } else {
+                icon.textContent = '+';
+            }
         }
 
         renderCalendar();
